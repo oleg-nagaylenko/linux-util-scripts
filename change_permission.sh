@@ -6,10 +6,11 @@
 
 ORANGE='\033[0;33m'
 GREEN='\033[0;32m'
+RED='\033[0;31m'
 NC='\033[0m'
 
-BASE_DIRECTORY="."
-PATTERN="*"
+BASE_DIRECTORY='.'
+PATTERN='*'
 PERMISSIONS="+rw"
 
 while [[ $# -gt 0 ]]; do
@@ -31,7 +32,7 @@ done
 
 TARGET_FILES=$(find "${BASE_DIRECTORY}" -type f -name "${PATTERN}")
 
-echo -e "Found files: \n$TARGET_FILES\n"
+echo -e "Found files: \n${TARGET_FILES}\n"
 
 echo -ne "${ORANGE}Are you sure you wanna change permissions for these files? [y/n] ${NC}"
 read -n 1 -r
@@ -39,6 +40,10 @@ read -n 1 -r
 echo
 if [[ $REPLY = 'y' ]]
 then
-  echo $TARGET_FILES | xargs chmod $PERMISSIONS
+  echo ${TARGET_FILES} | xargs chmod ${PERMISSIONS}
   echo -e "\n${GREEN}File permissions have been changed${NC}\n"  
+  exit 0
 fi
+
+echo -e "\n${RED}File permissions have not been changed${NC}\n"
+exit 1
