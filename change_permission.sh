@@ -30,4 +30,4 @@ done
 
 echo -e "\nPermissions: ${ORANGE}${PERMISSIONS}${NC} will be applied to files that matche pattern: ${ORANGE}${PATTERN}${NC} starting from directory: ${ORANGE}${BASE_DIRECTORY}${NC}\n";
 
-find "${BASE_DIRECTORY}" -name "${PATTERN}" -exec chmod "${PERMISSIONS}" {} \;
+find "${BASE_DIRECTORY}" -name "${PATTERN}" -type f -exec chmod "${PERMISSIONS}" {} \;
